@@ -2,7 +2,7 @@
 
 Reactアプリに入門した with TypeScript
 
-## ToDoアプリの仕様
+## 仕様
 
 - 完了／未完了別にリスト化して表示(Read)
 - 追加ができる(Create)
@@ -12,11 +12,21 @@ Reactアプリに入門した with TypeScript
 
 ## 実行
 
+1. モックサーバーの起動
+
 ```
+$ cd client
+$ npx json-server --watch db.json --port 3100
+```
+
+2. Reactアプリの起動
+
+```
+$ cd client
 $ npm start
 ```
 
-ブラウザから [http://localhost:3000](http://localhost:3000) へアクセス
+3. ブラウザから [http://localhost:3000](http://localhost:3000) へアクセス
 
 ## 参考
 
