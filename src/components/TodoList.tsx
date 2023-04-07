@@ -5,32 +5,32 @@ import { Todo } from "../types/Todo";
 // TodoItemをループして表示
 // todoListが0件の場合、タイトルとTODOリストを表示しない
 export const TodoList = ({
-  todoList,
-  toggleTodoListItemStatus,
-  deleteTodoListItem,
-  title,
-  as,
+    todoList,
+    toggleTodoListItemStatus,
+    deleteTodoListItem,
+    title,
+    as,
 }: {
-  todoList: Todo[];
-  toggleTodoListItemStatus: (id: string, status: boolean) => void;
-  deleteTodoListItem: (id: string) => void;
-  title: string;
-  as: string;
+    todoList: Todo[];
+    toggleTodoListItemStatus: (id: string, status: boolean) => void;
+    deleteTodoListItem: (id: string) => void;
+    title: string;
+    as: string;
 }) => {
-  return (
-    <>
-      {todoList.length !== 0 && (
+    return (
         <>
-          <TodoTitle title={title} as={as} />
-          <ul>
+        {todoList.length !== 0 && (
+            <>
+            <TodoTitle title={title} as={as} />
+            <ul>
             {todoList.map((todo) => (
-              <li key={todo.id}>
+                <li key={todo.id}>
                 <TodoItem todo={todo} key={todo.id} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
-              </li>
+                </li>
             ))}
-          </ul>
+            </ul>
+            </>
+        )}
         </>
-      )}
-    </>
-  );
+    );
 };

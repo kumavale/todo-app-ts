@@ -5,24 +5,24 @@ const todoDataUrl = "http://localhost:3100/todos";
 
 // 全TODOリスト取得
 export const getAllTodosData = async () => {
-  const response = await axios.get(todoDataUrl);
-  return response.data;
+    const response = await axios.get(todoDataUrl);
+    return response.data;
 };
 
 // 1件のTODOを追加する
 export const addTodoData = async (todo: Todo) => {
-  const response = await axios.post(todoDataUrl, todo);
-  return response.data;
+    const response = await axios.post(todoDataUrl, todo);
+    return response.data;
 };
 
 // 1件のTODOを削除する
 export const deleteTodoData = async (id: string) => {
-  await axios.delete(`${todoDataUrl}/${id}`);
-  return id;
+    await axios.delete(`${todoDataUrl}/${id}`);
+    return id;
 };
 
 // 1件のTODOを更新する
 export const updateTodoData = async (id: string, todo: Todo) => {
-  const response = await axios.put(`${todoDataUrl}/${id}`, todo);
-  return response.data;
+    const response = await axios.put(`${todoDataUrl}/${id}`, todo);
+    return response.data;
 };
