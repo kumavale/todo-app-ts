@@ -5,6 +5,7 @@ import { Todo } from "../types/Todo";
 import { TodoAdd } from "./TodoAdd";
 import { TodoList } from "./TodoList";
 import { TodoTitle } from "./TodoTitle";
+import "../css/style.css";
 
 function App() {
     // カスタムフックから必要な変数を取得
@@ -28,7 +29,7 @@ function App() {
     return (
         <>
         <TodoTitle title="TODO進捗管理" as="h1" />
-        <TodoAdd buttonText="+ TODOを追加" inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} />
+        <TodoAdd buttonText="TODOを追加" inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} />
         <TodoList todoList={incompletedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} title="未完了TODOリスト" as="h2" />
         <TodoList todoList={completedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} title="完了TODOリスト" as="h2" />
         </>

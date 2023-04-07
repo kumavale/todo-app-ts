@@ -25,7 +25,7 @@ export const TodoList = ({
             <ul>
             {todoList.map((todo) => (
                 <li key={todo.id}>
-                <TodoItem todo={todo} key={todo.id} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
+                <TodoItem todo={todo} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
                 </li>
             ))}
             </ul>
