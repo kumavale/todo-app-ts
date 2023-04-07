@@ -1,6 +1,6 @@
 # Todoアプリ
 
-Reactアプリに入門した with TypeScript
+Reactアプリに入門した with TypeScript and Rust
 
 ## 仕様
 
@@ -8,15 +8,14 @@ Reactアプリに入門した with TypeScript
 - 追加ができる(Create)
 - 状態（完了／未完了）をボタンクリックで変更できる(Update)
 - 削除ができる(Delete)
-- モックサーバーでTODO情報を更新管理できる
 
 ## 実行
 
-1. モックサーバーの起動
+1. バックエンドの起動
 
 ```
-$ cd client
-$ npx json-server --watch db.json --port 3100
+$ cd backend
+$ cargo run
 ```
 
 2. Reactアプリの起動
