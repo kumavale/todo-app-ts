@@ -2,8 +2,9 @@ use std::sync::Arc;
 use std::net::SocketAddr;
 
 use axum::{
-    extract::{Json, State},
-    routing::{get, post},
+    extract::{Json, Path, State},
+    response::IntoResponse,
+    routing::{get, post, delete},
     Router,
 };
 use serde::{Deserialize, Serialize};
@@ -48,6 +49,19 @@ async fn add_todo_data(
     Json(response)
 }
 
+async fn delete_todo_data(
+    State(pool): State<Arc<SqlitePool>>,
+    Path(id): Path<String>,
+) -> impl IntoResponse {
+    let mut conn = pool.acquire().await.unwrap();
+    sqlx::query(r#"DELETE FROM todos WHERE id = ?1;"#)
+        .bind(id)
+        .execute(&mut conn)
+        .await
+        .unwrap();
+    ""
+}
+
 #[tokio::main]
 async fn main() {
     // DBの作成
@@ -68,6 +82,7 @@ async fn main() {
     let app = Router::new()
         .route("/todos", get(get_all_todos_data))
         .route("/todos", post(add_todo_data))
+        .route("/todos/:id", delete(delete_todo_data))
         .layer(
             // FIXME: CORSの設定を見直す
             CorsLayer::permissive()
