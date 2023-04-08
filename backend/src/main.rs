@@ -4,7 +4,7 @@ use std::net::SocketAddr;
 use axum::{
     extract::{Json, Path, State},
     response::IntoResponse,
-    routing::{get, post, delete},
+    routing::{delete, get, post, put},
     Router,
 };
 use serde::{Deserialize, Serialize};
@@ -62,6 +62,22 @@ async fn delete_todo_data(
     ""
 }
 
+async fn update_todo_data(
+    State(pool): State<Arc<SqlitePool>>,
+    Path(id): Path<String>,
+    Json(data): Json<Todos>,
+) -> Json<Todos> {
+    let response = data.clone();
+    let mut conn = pool.acquire().await.unwrap();
+    sqlx::query(r#"UPDATE todos SET done = ?1 WHERE id = ?2;"#)
+        .bind(data.done)
+        .bind(id)
+        .execute(&mut conn)
+        .await
+        .unwrap();
+    Json(response)
+}
+
 #[tokio::main]
 async fn main() {
     // DBの作成
@@ -83,6 +99,7 @@ async fn main() {
         .route("/todos", get(get_all_todos_data))
         .route("/todos", post(add_todo_data))
         .route("/todos/:id", delete(delete_todo_data))
+        .route("/todos/:id", put(update_todo_data))
         .layer(
             // FIXME: CORSの設定を見直す
             CorsLayer::permissive()
