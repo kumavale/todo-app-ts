@@ -3,8 +3,11 @@ import { RefObject } from "react";
 export const TodoAdd = ({ buttonText, inputEl, handleAddTodoListItem }: { buttonText: string; inputEl: RefObject<HTMLTextAreaElement>; handleAddTodoListItem: () => void }) => {
     return (
         <>
-        <textarea ref={inputEl} cols={32} rows={4} />
-        <button onClick={handleAddTodoListItem}>{buttonText}</button>
+        <div id="add-todo">
+            <textarea ref={inputEl} rows={4} placeholder={"次に何をするべき？"} />
+            <br />
+            <button onClick={handleAddTodoListItem}>{buttonText}</button>
+        </div>
         </>
     );
 };

@@ -9,6 +9,7 @@ export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem }:
     return (
         <>
         {todo.content}
+        <br />
         <button onClick={handleToggleTodoListItemStatus}>{todo.done ? "未完了リストへ" : "完了リストへ"}</button>
         <button onClick={handleDeleteTodoListItem}>削除</button>
         </>
