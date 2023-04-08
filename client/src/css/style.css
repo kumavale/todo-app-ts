@@ -1,14 +1,22 @@
+body {
+    background-color: #FFFAF0;
+}
+
 button {
     margin-top: 8px;
     margin-right: 16px;
 }
 
 li {
+    background-color: white;
     list-style-type: none;
     border-style: outset;
-    padding: 4px;
+    border-radius: 8px;
+    padding: 8px;
     margin-top: 16px;
     margin-right: 40px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 textarea {
@@ -22,11 +30,12 @@ textarea {
 }
 
 #add-todo {
-    border: 2px solid;
+    background-color: white;
+    border: 1px solid;
     border-radius: 8px;
     max-width: calc(100% - 80px);
     margin-left: 40px;
 }
 #add-todo > button {
-    margin: 4px;
+    margin: 8px;
 }
