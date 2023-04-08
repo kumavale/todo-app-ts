@@ -14,8 +14,6 @@ export const addTodoData = async (todo: Todo) => {
     const response = await axios.post(todoDataUrl, todo, {
         headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            "Accept": "application/json",
         }
     });
     return response.data;

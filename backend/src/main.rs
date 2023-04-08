@@ -3,11 +3,9 @@ use std::net::SocketAddr;
 
 use axum::{
     extract::{Json, State},
-    http::HeaderValue,
     routing::{get, post},
     Router,
 };
-use http::{Method};
 use serde::{Deserialize, Serialize};
 use sqlx::{migrate::MigrateDatabase, Sqlite, SqlitePool};
 use tower_http::cors::CorsLayer;
@@ -71,9 +69,11 @@ async fn main() {
         .route("/todos", get(get_all_todos_data))
         .route("/todos", post(add_todo_data))
         .layer(
-            CorsLayer::new()
-                .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
-                .allow_methods([Method::GET, Method::POST])
+            // FIXME: CORSの設定を見直す
+            CorsLayer::permissive()
+            //CorsLayer::new()
+            //    .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
+            //    .allow_methods([Method::GET, Method::POST])
         )
         .with_state(Arc::new(pool));
 
