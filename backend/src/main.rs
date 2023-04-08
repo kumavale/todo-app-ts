@@ -7,6 +7,7 @@ use axum::{
     routing::{delete, get, post, put},
     Router,
 };
+use http::{Method, HeaderValue, header::CONTENT_TYPE};
 use serde::{Deserialize, Serialize};
 use sqlx::{migrate::MigrateDatabase, Sqlite, SqlitePool};
 use tower_http::cors::CorsLayer;
@@ -101,11 +102,10 @@ async fn main() {
         .route("/todos/:id", delete(delete_todo_data))
         .route("/todos/:id", put(update_todo_data))
         .layer(
-            // FIXME: CORSの設定を見直す
-            CorsLayer::permissive()
-            //CorsLayer::new()
-            //    .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
-            //    .allow_methods([Method::GET, Method::POST])
+            CorsLayer::new()
+                .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
+                .allow_methods([Method::GET, Method::POST, Method::DELETE, Method::PUT])
+                .allow_headers([CONTENT_TYPE])
         )
         .with_state(Arc::new(pool));
 
